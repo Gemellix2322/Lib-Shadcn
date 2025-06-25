@@ -43,7 +43,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: linear-gradient(to right, #D06409, #F97D00);
+  --background: oklch(100% 0.00011 271.152);
   --foreground: oklch(0.13 0.028 261.692);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.13 0.028 261.692);
@@ -112,7 +112,6 @@
 
 @layer base {
   * {
-    background: linear-gradient(to right, #D06409, #F97D00);
     @apply border-border outline-ring/50;
   }
   body {

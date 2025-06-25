@@ -28,3 +28,9 @@ export const Loading: Story = {
     isLoading: true
   }
 }
+
+export const Gradient: Story = {
+  args: {
+    variant: "gradient"
+  }
+}
