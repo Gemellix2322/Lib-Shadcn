@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button as ButtonCN } from './button';
 
 const meta: Meta<typeof ButtonCN> ={
-  title: 'Components/Button',
+  title: 'UI/Button',
   component: ButtonCN, // Aqui você define que o componente é ButtonCN
   parameters: {
     layout: 'centered',
