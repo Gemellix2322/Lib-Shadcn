@@ -37,7 +37,6 @@ export const Default: Story = {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction>Continuar</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

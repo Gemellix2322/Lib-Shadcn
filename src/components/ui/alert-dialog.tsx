@@ -45,6 +45,7 @@ function AlertDialogOverlay({
 
 function AlertDialogContent({
   className,
+  children, // Added children prop
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
   return (
@@ -56,8 +57,28 @@ function AlertDialogContent({
           "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
           className
         )}
+        onOpenAutoFocus={(event) => event.preventDefault()}
         {...props}
-      />
+      >
+        {children}
+        <AlertDialogPrimitive.Cancel
+          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4"
+          >
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+          <span className="sr-only">Close</span>
+        </AlertDialogPrimitive.Cancel>
+      </AlertDialogPrimitive.Content>
     </AlertDialogPortal>
   )
 }
@@ -156,32 +177,34 @@ export {
 }
 
 type DialogProps = {
-  children: any
+  children?: React.ReactNode // Changed to React.ReactNode for more flexibility
   title?: string,
   description?: string,
-  open: boolean
+  open: boolean,
+  onOpenChange?: (open: boolean) => void // Add onOpenChange prop for controlled component
 }
 
 export function Dialog({
   open,
   title,
   description,
+  onOpenChange
 }: DialogProps) {
-
-  return(
-  <AlertDialog open={open}>
-  <AlertDialogTrigger >
-    Abrir Diálogo
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>{title}</AlertDialogTitle>
-      <AlertDialogDescription>{description}</AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Cancelar</AlertDialogCancel>
-      <AlertDialogAction>Continuar</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-)}
+  return (
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
+      <AlertDialogTrigger>
+        Abrir Diálogo
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          {/* Keep AlertDialogAction if you still want a primary action button */}
+          <AlertDialogAction>Continuar</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
