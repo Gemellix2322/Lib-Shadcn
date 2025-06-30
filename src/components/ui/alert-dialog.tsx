@@ -45,7 +45,7 @@ function AlertDialogOverlay({
 
 function AlertDialogContent({
   className,
-  children, // Added children prop
+  children, 
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
   return (
@@ -176,32 +176,61 @@ export {
   AlertDialogCancel,
 }
 
+
+
+
+
+
 type DialogProps = {
-  children?: React.ReactNode // Changed to React.ReactNode for more flexibility
-  title?: string,
-  description?: string,
+  trigger?: React.ReactNode
+  children?: React.ReactNode 
+  text?: string,
   open: boolean,
-  onOpenChange?: (open: boolean) => void // Add onOpenChange prop for controlled component
+  onOpenChange?: (open: boolean) => void
 }
 
 export function Dialog({
+  trigger,
   open,
-  title,
-  description,
+  text,
   onOpenChange
 }: DialogProps) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogTrigger>
-        Abrir Diálogo
-      </AlertDialogTrigger>
+      {trigger}
+      <AlertDialogContent>
+        {text}
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+
+
+type ConfirmationProps = {
+  trigger?: React.ReactNode
+  children?: React.ReactNode 
+  title?: string,
+  description?: string,
+  open: boolean,
+  onOpenChange?: (open: boolean) => void
+}
+
+export function Confirmation({
+  trigger,
+  open,
+  title,
+  description,
+  onOpenChange
+}: ConfirmationProps) {
+  return (
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
+      {trigger}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          {/* Keep AlertDialogAction if you still want a primary action button */}
           <AlertDialogAction>Continuar</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -10,6 +10,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from './alert-dialog';
+import { Dialog as DialogAlert, Confirmation as ConfirmationAlert } from './alert-dialog';
+import { Button } from '../ButtonLib/button';
+import React from 'react';
 
 const meta: Meta<typeof AlertDialog> = {
   title: 'UI/AlertDialog',
@@ -101,3 +104,32 @@ export const CancelOnly: Story = {
     </AlertDialog>
   ),
 };
+
+export const Dialog: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <DialogAlert 
+      open={open} 
+      onOpenChange={setOpen} 
+      trigger={<AlertDialogTrigger asChild><Button>Open Dialog</Button></AlertDialogTrigger>} 
+      text='hello world' 
+      />
+    )
+  }
+}
+
+export const Confirmation: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+    return (
+    <ConfirmationAlert 
+    open={open} 
+    onOpenChange={setOpen} 
+    trigger={<AlertDialogTrigger asChild><Button>Open Confirmation</Button></AlertDialogTrigger>} 
+    title='Teste Confirmação' 
+    description='Teste descrição da Confirmação' 
+    />
+    )
+  }
+}
