@@ -25,9 +25,21 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: (args) => {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const handleActionClick = () => {
+      setIsOpen(false);
+    };
+
     return (
       <Dialog
         {...args}
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        trigger={<Button onClick={() => setIsOpen(true)}>Abrir Diálogo</Button>}
+        actionButtonText="Confirmar"
+        onActionClick={handleActionClick}
+        cancelButtonText={undefined}
       />
     );
   },
