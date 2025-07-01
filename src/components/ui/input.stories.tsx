@@ -1,16 +1,16 @@
-import { Checkbox } from "./checkbox";
+import { Input } from "./input";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Label } from "./label";
 
 const meta = {
-    title: 'UI/Checkbox',
-    component: Checkbox,
+    title: 'UI/Input',
+    component: Input,
     parameters: {
         layout: 'centered'
     },
     tags: ['autodocs'],
     args: {}
-} satisfies Meta<typeof Checkbox>
+} satisfies Meta<typeof Input>
 
 export default meta
 
@@ -20,10 +20,9 @@ export const Default: Story = {
     render: () => {
         return (
             <>
-            <Label>Teste Checkbox</Label>
-            <Checkbox></Checkbox>
+            <Label>Teste</Label>
+            <Input placeholder="Teste"></Input>
             </>
-            
         )
     }
 }
